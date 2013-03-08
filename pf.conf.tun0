@@ -1,0 +1,12 @@
+# vim: syntax=pf
+set skip on lo0
+
+block return log
+block inet6
+
+altq on tun0 priq bandwidth 0.68Mb qlimit 15000 queue { vpn, vpn_ssh, vpn_ack }
+queue vpn priq(default)
+queue vpn_ssh priority 4 priq(red)
+queue vpn_ack priority 6
+
+include "/etc/pf.conf.tunnel"

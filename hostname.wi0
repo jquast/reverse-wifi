@@ -1,0 +1,13 @@
+# example WLAN interface
+nwid yjjiw
+nwkey persist:0x7082468367
+# randomize a mac address and persist to /etc/mac.$if, re-used if exists.
+!/sbin/ifconfig \$if lladdr $(
+[ ! -f /etc/\$if.mac ] \
+      && dd if=/dev/urandom 2>/dev/null \
+      | od -tx8 | awk '{
+	printf("7c:d1:%s:%s:%s:%s",
+		substr(\$2,0,2), substr(\$2,2,2),
+		substr(\$2,4,2), substr(\$2,6,2));
+	exit;}' > /etc/\$if.mac; cat /etc/\$if.mac)
+dhcp NONE NONE NONE
