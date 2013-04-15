@@ -22,14 +22,14 @@ orig_gw=$(route -n show | awk '
 ifconfig $tunnel_client_if $tunnel_client_end $tunnel_server_end
 if [ X"$orig_gw" != X"" ]; then
   # delete default route
-  route delete default $orig_gw 2>/dev/null >&2
+  route delete default $orig_gw 2>&1 >/dev/null
   # add route to tunnel endpoing
-  route add $tunnel_server $orig_gw 2>/dev/null >&2
+  route add $tunnel_server $orig_gw 2>&1 >/dev/null
   echo ${orig_gw} > `dirname ${0}`/${1}.orig_gw
 fi
 
 # add tunnel endpoing as default route
-route add default $tunnel_server_end 2>/dev/null
+route add default $tunnel_server_end 2>&1 >/dev/null
 
 # reload packet filter
-pfctl -f /etc/pf.conf.${tunnel_client_if}
+pfctl -f /etc/pf.conf
