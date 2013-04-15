@@ -10,11 +10,11 @@ if [ ! -f `dirname ${0}`/${1}.info ]; then
 fi
 
 . `dirname ${0}`/${1}.info
-route delete default $tunnel_server_end 2>/dev/null
-route delete $tunnel_server 2>/dev/null
-ifconfig $tunnel_client_if destroy 2>/dev/null
+route delete default $tunnel_server_end 2>&1 >/dev/null
+route delete $tunnel_server 2>&1 >/dev/null
+ifconfig $tunnel_client_if destroy 2>&1 >/dev/null
 orig_gw=$(cat `dirname ${0}`/${1}.orig_gw 2>/dev/null)
 if [ X"$orig_gw" != X"" ]; then
-  route add default $orig_gw 2>/dev/null
+  route add default $orig_gw 2>&1 >/dev/null
 fi
 pfctl -f /etc/pf.conf
