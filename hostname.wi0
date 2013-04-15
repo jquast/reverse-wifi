@@ -1,6 +1,6 @@
-# example WLAN interface
-nwid yjjiw
-nwkey persist:0x7082468367
+# example WLAN interface, /etc/hostname.wi0
+nwid xyzzy
+nwkey persist:0x7070707070
 # randomize a mac address and persist to /etc/mac.$if, re-used if exists.
 !/sbin/ifconfig \$if lladdr $(
 [ ! -f /etc/\$if.mac ] \
