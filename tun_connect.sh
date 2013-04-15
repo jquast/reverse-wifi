@@ -10,7 +10,7 @@ if [ ! -f `dirname $0`/$1.info ]; then
 fi
 tun_name=${1}
 . `dirname ${0}`/${tun_name}.info
-TUN_DOWN="`dirname ${0}`/tun_down ${tun_name}"
+TUN_DOWN="`dirname ${0}`/tun_down.sh ${tun_name}"
 
 echo -n '+'
 ssh \
@@ -42,7 +42,7 @@ while [ 0 ]; do
       '-oTunnel point-to-point' \
       '-oTunnelDevice '"${tunnel_client_ifnum}:${tunnel_server_ifnum}" \
       '-oPermitLocalCommand yes' \
-      '-oLocalCommand /tun_up '"$1" \
+      '-oLocalCommand '"`dirname $0`/tun_up $1" \
       '-oRemoteForward 127.0.0.1:30050 127.0.0.1:10050' \
       '-oHostName '"${tunnel_server}" \
       '-oPort '"${tunnel_port}" \
