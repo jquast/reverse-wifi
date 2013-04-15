@@ -6,8 +6,8 @@ tunnel_port=1984
 # ssh user
 tunnel_user=root
 # tunnel endpoint and client IP (ours, theirs)
-tunnel_client_end=10.254.254.2
 tunnel_server_end=10.254.254.1
+tunnel_client_end=10.254.254.2
 # client and endpoing interface and interface number
 tunnel_client_if=tun0
 tunnel_client_ifnum=0
